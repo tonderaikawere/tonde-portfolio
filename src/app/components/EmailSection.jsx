@@ -9,16 +9,28 @@ import GalaxyBackground from "./GalaxyBackground";
 
 const EmailSection = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError(null);
     const data = {
       email: e.target.email.value,
       subject: e.target.subject.value,
       message: e.target.message.value,
     };
-    const JSONdata = JSON.stringify(data);
-    const endpoint = "/api/send";
+    const JSONdata = JSON.stringify({
+      name: "Portfolio Website Visitor",
+      email: data.email,
+      subject: data.subject,
+      message: data.message,
+      _replyto: data.email,
+      _subject: `Portfolio Contact: ${data.subject}`,
+      _captcha: "false",
+      _template: "table",
+    });
+
+    const endpoint = "https://formsubmit.co/ajax/tondekawere@gmail.com";
 
     // Form the request for sending data to the server.
     const options = {
@@ -33,12 +45,21 @@ const EmailSection = () => {
     };
 
     const response = await fetch(endpoint, options);
-    const resData = await response.json();
+    const resData = await response.json().catch(() => null);
 
-    if (response.status === 200) {
+    if (response.ok && (resData?.success === "true" || resData?.success === true)) {
       console.log("Message sent.");
       setEmailSubmitted(true);
+      e.target.reset();
+      return;
     }
+
+    const errorMsg =
+      resData?.message ||
+      resData?.error ||
+      "Failed to send message. Please try again.";
+
+    setSubmitError(typeof errorMsg === "string" ? errorMsg : "Failed to send message. Please try again.");
   };
 
   return (
@@ -59,7 +80,7 @@ const EmailSection = () => {
         </p>
         <div className="socials flex flex-row gap-2">
           <motion.a
-            href="https://github.com/tondekawere"
+            href="https://github.com/tonderaikawere"
             target={"_blank"}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.9 }}
@@ -72,7 +93,7 @@ const EmailSection = () => {
             />
           </motion.a>
           <motion.a
-            href="https://linkedin.com/in/tonderai-kawere"
+            href="https://www.linkedin.com/in/tonderai-kawere-b29324268"
             target={"_blank"}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.9 }}
@@ -86,7 +107,7 @@ const EmailSection = () => {
           </motion.a>
         </div>
       </div>
-      <div>
+      <div className="z-10">
         {emailSubmitted ? (
           <p className="text-green-500 text-sm mt-2">
             Email sent successfully!
@@ -106,7 +127,7 @@ const EmailSection = () => {
                 id="email"
                 required
                 className="bg-gray-50 dark:bg-[#18191E] border border-gray-300 dark:border-[#33353F] placeholder-gray-500 dark:placeholder-[#9CA2A9] text-gray-900 dark:text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:ring-2 focus:ring-blue-500 dark:focus:ring-cyan-500 focus:border-transparent transition-colors duration-300"
-                placeholder="tondekawere@gmail.com"
+                placeholder="you@example.com"
               />
             </div>
             <div className="mb-6">
@@ -135,6 +156,7 @@ const EmailSection = () => {
               <textarea
                 name="message"
                 id="message"
+                required
                 className="bg-gray-50 dark:bg-[#18191E] border border-gray-300 dark:border-[#33353F] placeholder-gray-500 dark:placeholder-[#9CA2A9] text-gray-900 dark:text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:ring-2 focus:ring-blue-500 dark:focus:ring-cyan-500 focus:border-transparent transition-colors duration-300 min-h-[120px]"
                 placeholder="Let's talk about..."
               />
@@ -145,6 +167,9 @@ const EmailSection = () => {
             >
               Send Message
             </button>
+            {submitError ? (
+              <p className="text-red-500 text-sm mt-3">{submitError}</p>
+            ) : null}
           </form>
         )}
       </div>

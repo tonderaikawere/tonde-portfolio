@@ -2,6 +2,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+const prand = (seed) => {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+};
+
+const round = (num, digits = 6) => {
+  const p = 10 ** digits;
+  return Math.round(num * p) / p;
+};
+
+const pct = (seed, range = 100, offset = 0, digits = 6) => {
+  const val = round(prand(seed) * range + offset, digits);
+  return `${val.toFixed(digits)}%`;
+};
+
 const GalaxyBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -20,17 +35,17 @@ const GalaxyBackground = () => {
           key={`star-${i}`}
           className="absolute w-1 h-1 bg-gray-400 dark:bg-white rounded-full"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            left: pct(i + 1),
+            top: pct(i + 101),
           }}
           animate={{
             opacity: [0.2, 1, 0.2],
             scale: [0.5, 1.5, 0.5],
           }}
           transition={{
-            duration: 2 + Math.random() * 3,
+            duration: 2 + prand(i + 201) * 3,
             repeat: Infinity,
-            delay: Math.random() * 2,
+            delay: prand(i + 301) * 2,
           }}
         />
       ))}
@@ -41,10 +56,10 @@ const GalaxyBackground = () => {
           key={`nebula-${i}`}
           className="absolute rounded-full blur-2xl"
           style={{
-            left: `${Math.random() * 80 + 10}%`,
-            top: `${Math.random() * 80 + 10}%`,
-            width: `${100 + Math.random() * 200}px`,
-            height: `${100 + Math.random() * 200}px`,
+            left: pct(i + 401, 80, 10),
+            top: pct(i + 501, 80, 10),
+            width: `${(100 + prand(i + 601) * 200).toFixed(3)}px`,
+            height: `${(100 + prand(i + 701) * 200).toFixed(3)}px`,
             background: `radial-gradient(circle, ${
               i % 3 === 0 ? 'rgba(147, 51, 234, 0.1)' : 
               i % 3 === 1 ? 'rgba(6, 182, 212, 0.1)' : 
@@ -57,7 +72,7 @@ const GalaxyBackground = () => {
             scale: [1, 1.2, 1],
           }}
           transition={{
-            duration: 15 + Math.random() * 10,
+            duration: 15 + prand(i + 801) * 10,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -70,11 +85,11 @@ const GalaxyBackground = () => {
           key={`shooting-${i}`}
           className="absolute w-px h-px bg-gradient-to-r from-transparent via-gray-500 dark:via-white to-transparent"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            left: pct(i + 901),
+            top: pct(i + 1001),
           }}
           animate={{
-            x: [-100, typeof window !== 'undefined' ? window.innerWidth : 1000],
+            x: [-100, 1000],
             y: [0, 200],
             opacity: [0, 1, 0],
             scaleX: [0, 50, 0],
@@ -82,7 +97,7 @@ const GalaxyBackground = () => {
           transition={{
             duration: 2,
             repeat: Infinity,
-            delay: i * 8 + Math.random() * 5,
+            delay: i * 8 + prand(i + 1101) * 5,
             ease: "easeOut",
           }}
         />
@@ -94,20 +109,20 @@ const GalaxyBackground = () => {
           key={`particle-${i}`}
           className="absolute w-0.5 h-0.5 rounded-full"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            left: pct(i + 1201),
+            top: pct(i + 1301),
             backgroundColor: i % 2 === 0 ? '#06b6d4' : '#a855f7',
           }}
           animate={{
             y: [0, -100, 0],
-            x: [0, Math.random() * 50 - 25, 0],
+            x: [0, prand(i + 1401) * 50 - 25, 0],
             opacity: [0.3, 0.8, 0.3],
           }}
           transition={{
-            duration: 8 + Math.random() * 4,
+            duration: 8 + prand(i + 1601) * 4,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: Math.random() * 5,
+            delay: prand(i + 1501) * 5,
           }}
         />
       ))}

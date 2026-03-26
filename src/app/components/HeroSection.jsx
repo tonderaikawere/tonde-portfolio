@@ -45,8 +45,8 @@ const HeroSection = () => {
                   Hire Me
                 </Link>
                 <Link
-                  download={true}
-                  href="/cv-tonde.pdf"
+                  href="/Tonderai-Kawere-CV.pdf"
+                  download="Tonderai-Kawere-CV.pdf"
                   className="px-6 py-3 rounded-full border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white dark:hover:text-gray-900 font-medium transition-all duration-300 hover:scale-105 text-center text-sm"
                 >
                   Download CV
