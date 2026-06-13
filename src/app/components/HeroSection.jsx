@@ -23,7 +23,7 @@ const HeroSection = () => {
                   Hello, I&apos;m{" "}
                 </span>
                 <br />
-                <div className="min-h-[4rem] sm:min-h-[5rem] md:min-h-[6rem] lg:min-h-[7rem] flex items-center justify-center lg:justify-start overflow-hidden">
+                <div className="min-h-[4rem] sm:min-h-[5rem] md:min-h-[6rem] lg:min-h-[7rem] flex items-center justify-center lg:justify-start">
                   <TypeAnimation
                     sequence={["Tonderai Kawere", 1000, "A Software Developer", 1000]}
                     wrapper="span"
