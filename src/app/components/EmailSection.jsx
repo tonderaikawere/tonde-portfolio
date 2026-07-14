@@ -69,9 +69,9 @@ const EmailSection = () => {
     >
       <GalaxyBackground />
       <div className="z-10">
-        <h5 className="text-xl font-bold text-gray-900 dark:text-white my-2 transition-colors duration-300">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white my-2 transition-colors duration-300">
           Let&apos;s Connect
-        </h5>
+        </h2>
         <p className="text-gray-600 dark:text-[#ADB7BE] mb-4 max-w-md transition-colors duration-300">
           {" "}
           I&apos;m currently looking for new opportunities, my inbox is always
