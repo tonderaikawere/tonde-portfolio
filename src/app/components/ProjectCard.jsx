@@ -84,7 +84,7 @@ const ProjectCard = ({
             // Website: Show Live Demo and GitHub buttons with equal widths
             <div className="grid grid-cols-2 gap-3">
               {previewUrl && (
-                <Link
+                <a
                   href={previewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -92,10 +92,10 @@ const ProjectCard = ({
                 >
                   <EyeIcon className="h-4 w-4 flex-shrink-0" />
                   <span className="truncate">Live Demo</span>
-                </Link>
+                </a>
               )}
               {gitUrl && (
-                <Link
+                <a
                   href={gitUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -103,7 +103,7 @@ const ProjectCard = ({
                 >
                   <CodeBracketIcon className="h-4 w-4 flex-shrink-0" />
                   <span className="truncate">GitHub</span>
-                </Link>
+                </a>
               )}
             </div>
           )}

@@ -38,19 +38,19 @@ const HeroSection = () => {
                 Crafting innovative software solutions across web, mobile, and desktop platforms with 3+ years of professional experience.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <Link
+                <a
                   href="mailto:tondekawere@gmail.com?subject=Hiring Inquiry&body=Hi Tonderai, I'm interested in discussing a potential project with you."
                   className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium transition-all duration-300 hover:scale-105 text-center text-sm"
                 >
                   Hire Me
-                </Link>
-                <Link
+                </a>
+                <a
                   href="/Tonderai-Kawere-CV.pdf"
                   download="Tonderai-Kawere-CV.pdf"
                   className="px-6 py-3 rounded-full border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white dark:hover:text-gray-900 font-medium transition-all duration-300 hover:scale-105 text-center text-sm"
                 >
                   Download CV
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>
