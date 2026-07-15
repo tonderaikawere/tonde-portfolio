@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
 import ProjectCard from "./ProjectCard";
-import { motion, useInView } from "framer-motion";
 
 const projectsData = [
   // Personal Projects
@@ -194,13 +193,25 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" className="py-12 md:py-16 px-4 md:px-6 lg:px-8">
+      <style>{`
+        @keyframes slideDownFade {
+          from { opacity: 0; transform: translate3d(0, -20px, 0); }
+          to { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+        @keyframes cardFadeIn {
+          from { opacity: 0; transform: translate3d(0, 20px, 0); }
+          to { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+      `}</style>
+
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10 md:mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+          <div
+            style={{
+              animation: 'slideDownFade 0.5s ease-out forwards',
+              willChange: 'transform, opacity',
+            }}
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-3 md:mb-4">
               Work & Projects
@@ -209,7 +220,7 @@ const ProjectsSection = () => {
               Exploring creativity through code, personal experiments, client
               solutions, and community gifts
             </p>
-          </motion.div>
+          </div>
         </div>
 
         {/* Tab Navigation - Responsive */}
@@ -250,19 +261,22 @@ const ProjectsSection = () => {
         {/* Projects Grid - Fully Responsive */}
         <div ref={ref}>
           {filteredProjects.length > 0 ? (
-            <motion.ul
+            <ul
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
+              style={{
+                willChange: 'opacity',
+              }}
             >
               {filteredProjects.map((project, index) => (
-                <motion.li
-                  key={project.id}
-                  initial={{ y: 30, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                <li
+                  key={`${activeTab}-${project.id}`} // use composite key to force re-render/re-animation when activeTab changes
                   className="h-full w-full"
+                  style={{
+                    animation: 'cardFadeIn 0.3s ease-out forwards',
+                    animationDelay: `${index * 0.05}s`,
+                    opacity: 0,
+                    willChange: 'transform, opacity',
+                  }}
                 >
                   <ProjectCard
                     title={project.title}
@@ -273,20 +287,16 @@ const ProjectsSection = () => {
                     playStoreUrl={project.playStoreUrl}
                     appStoreUrl={project.appStoreUrl}
                   />
-                </motion.li>
+                </li>
               ))}
-            </motion.ul>
+            </ul>
           ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12 md:py-16"
-            >
+            <div className="text-center py-12 md:py-16">
               <div className="text-5xl md:text-6xl mb-4">🔍</div>
               <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg">
                 No projects found in this category.
               </p>
-            </motion.div>
+            </div>
           )}
         </div>
       </div>

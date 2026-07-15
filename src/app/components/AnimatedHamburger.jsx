@@ -1,6 +1,5 @@
 "use client";
 import React from 'react';
-import { motion } from 'framer-motion';
 
 const AnimatedHamburger = ({ isOpen, onClick }) => {
   return (
@@ -10,33 +9,28 @@ const AnimatedHamburger = ({ isOpen, onClick }) => {
       aria-label="Toggle menu"
     >
       {/* Top line */}
-      <motion.span
-        className="block h-0.5 w-6 bg-gray-700 dark:bg-gray-200 rounded-sm"
-        animate={{
-          rotate: isOpen ? 45 : 0,
-          y: isOpen ? 8 : 0,
+      <span
+        className="block h-0.5 w-6 bg-gray-700 dark:bg-gray-200 rounded-sm transition-all duration-300 ease-in-out"
+        style={{
+          transform: isOpen ? 'rotate(45deg) translate3d(5px, 6px, 0)' : 'translate3d(0, 0, 0)',
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
       />
       
       {/* Middle line */}
-      <motion.span
-        className="block h-0.5 w-6 bg-gray-700 dark:bg-gray-200 rounded-sm my-1"
-        animate={{
+      <span
+        className="block h-0.5 w-6 bg-gray-700 dark:bg-gray-200 rounded-sm my-1 transition-all duration-300 ease-in-out"
+        style={{
           opacity: isOpen ? 0 : 1,
-          x: isOpen ? -10 : 0,
+          transform: isOpen ? 'translate3d(-10px, 0, 0)' : 'translate3d(0, 0, 0)',
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
       />
       
       {/* Bottom line */}
-      <motion.span
-        className="block h-0.5 w-6 bg-gray-700 dark:bg-gray-200 rounded-sm"
-        animate={{
-          rotate: isOpen ? -45 : 0,
-          y: isOpen ? -8 : 0,
+      <span
+        className="block h-0.5 w-6 bg-gray-700 dark:bg-gray-200 rounded-sm transition-all duration-300 ease-in-out"
+        style={{
+          transform: isOpen ? 'rotate(-45deg) translate3d(5px, -6px, 0)' : 'translate3d(0, 0, 0)',
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
       />
     </button>
   );

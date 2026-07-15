@@ -1,10 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
-
-const variants = {
-  default: { width: 0 },
-  active: { width: "calc(100% - 0.75rem)" },
-};
 
 const TabButton = ({ active, selectTab, children }) => {
   const buttonClasses = active 
@@ -16,11 +10,14 @@ const TabButton = ({ active, selectTab, children }) => {
       <p className={`mr-3 font-semibold hover:text-blue-600 dark:hover:text-blue-400 ${buttonClasses}`}>
         {children}
       </p>
-      <motion.div
-        animate={active ? "active" : "default"}
-        variants={variants}
-        className="h-1 bg-blue-600 dark:bg-blue-600 mt-2 mr-3"
-      ></motion.div>
+      <div
+        className="h-1 bg-blue-600 dark:bg-blue-600 mt-2 mr-3 transition-all duration-300 ease-in-out"
+        style={{
+          width: active ? "calc(100% - 0.75rem)" : "0px",
+          transform: 'translate3d(0, 0, 0)',
+          willChange: 'width',
+        }}
+      />
     </button>
   );
 };

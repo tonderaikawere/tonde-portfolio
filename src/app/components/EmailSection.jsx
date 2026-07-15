@@ -4,7 +4,7 @@ import GithubIcon from "../../../public/github-icon.svg";
 import LinkedinIcon from "../../../public/linkedin-icon.svg";
 // import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+// Removed framer-motion import
 import GalaxyBackground from "./GalaxyBackground";
 
 const EmailSection = () => {
@@ -79,32 +79,30 @@ const EmailSection = () => {
           try my best to get back to you!
         </p>
         <div className="socials flex flex-row gap-2">
-          <motion.a
+          <a
             href="https://github.com/tonderaikawere"
-            target={"_blank"}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.9 }}
-            className="hover:opacity-80 transition-all duration-300 p-2 rounded-full bg-gray-100 dark:bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-80 transition-all duration-300 p-2 rounded-full bg-gray-100 dark:bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800 hover:-translate-y-0.5 active:scale-95 transform"
           >
             <Image 
               src={GithubIcon} 
               alt="Github Icon" 
               className="w-8 h-8 filter invert dark:invert-0"
             />
-          </motion.a>
-          <motion.a
+          </a>
+          <a
             href="https://www.linkedin.com/in/tonderai-kawere-b29324268"
-            target={"_blank"}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.9 }}
-            className="hover:opacity-80 transition-all duration-300 p-2 rounded-full bg-gray-100 dark:bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-80 transition-all duration-300 p-2 rounded-full bg-gray-100 dark:bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800 hover:-translate-y-0.5 active:scale-95 transform"
           >
             <Image 
               src={LinkedinIcon} 
               alt="Linkedin Icon" 
               className="w-8 h-8 filter invert dark:invert-0"
             />
-          </motion.a>
+          </a>
         </div>
       </div>
       <div className="z-10">

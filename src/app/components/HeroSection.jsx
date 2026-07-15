@@ -1,21 +1,38 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
-import { motion } from "framer-motion";
-import Link from "next/link";
 import AnimatedGlobe from "./AnimatedGlobe";
 
 const HeroSection = () => {
   return (
     <section className="min-h-screen relative flex items-center py-20 lg:py-0">
+      <style>{`
+        @keyframes heroEntrance {
+          from { opacity: 0; transform: scale(0.95) translate3d(0, 0, 0); }
+          to { opacity: 1; transform: scale(1) translate3d(0, 0, 0); }
+        }
+        @keyframes codeFloatY {
+          0%, 100% { transform: translate3d(0, -5px, 0); }
+          50% { transform: translate3d(0, 5px, 0); }
+        }
+        @keyframes codeFloatYReverse {
+          0%, 100% { transform: translate3d(0, 5px, 0); }
+          50% { transform: translate3d(0, -5px, 0); }
+        }
+        @keyframes codeRotate {
+          from { transform: rotate(0deg) translate3d(0, 0, 0); }
+          to { transform: rotate(360deg) translate3d(0, 0, 0); }
+        }
+      `}</style>
+
       <div className="container mx-auto px-4 lg:px-8 xl:px-16 2xl:px-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+          <div
             className="lg:col-span-7 text-center lg:text-left order-2 lg:order-1"
+            style={{
+              animation: 'heroEntrance 0.5s ease-out forwards',
+              willChange: 'transform, opacity',
+            }}
           >
             <div className="max-w-3xl mx-auto lg:mx-0">
               <h1 className="text-gray-900 dark:text-white mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
@@ -53,39 +70,47 @@ const HeroSection = () => {
                 </a>
               </div>
             </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+          </div>
+          
+          <div
             className="lg:col-span-5 flex justify-center items-center order-1 lg:order-2"
+            style={{
+              animation: 'heroEntrance 0.5s ease-out forwards',
+              willChange: 'transform, opacity',
+            }}
           >
             <div className="relative flex justify-center items-center w-full">
               <AnimatedGlobe />
               {/* Floating code elements - hidden on very small screens */}
-              <motion.div
+              <div
                 className="absolute -top-4 sm:-top-8 -left-4 sm:-left-8 text-cyan-500 dark:text-cyan-400 text-lg sm:text-2xl hidden sm:block"
-                animate={{ y: [-5, 5, -5] }}
-                transition={{ duration: 3, repeat: Infinity }}
+                style={{
+                  animation: 'codeFloatY 3s infinite ease-in-out',
+                  willChange: 'transform',
+                }}
               >
                 &lt;/&gt;
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className="absolute -bottom-3 sm:-bottom-6 -right-3 sm:-right-6 text-purple-500 dark:text-purple-400 text-base sm:text-xl hidden sm:block"
-                animate={{ y: [5, -5, 5] }}
-                transition={{ duration: 2.5, repeat: Infinity }}
+                style={{
+                  animation: 'codeFloatYReverse 2.5s infinite ease-in-out',
+                  willChange: 'transform',
+                }}
               >
                 &#123;&#125;
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className="absolute top-1/4 -right-6 sm:-right-12 text-green-500 dark:text-green-400 text-sm sm:text-lg hidden sm:block"
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 8, repeat: Infinity }}
+                style={{
+                  animation: 'codeRotate 8s infinite linear',
+                  willChange: 'transform',
+                }}
               >
                 ⚡
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
