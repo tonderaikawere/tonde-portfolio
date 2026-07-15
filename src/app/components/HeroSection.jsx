@@ -4,11 +4,15 @@ import dynamic from 'next/dynamic';
 
 const AnimatedGlobe = dynamic(() => import('./AnimatedGlobe'), {
   ssr: false,
+  loading: () => <div className="w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] mx-auto rounded-full bg-gradient-to-br from-cyan-500/10 to-purple-600/10 border border-gray-300/5" />
 });
 
 const TypeAnimation = dynamic(
   () => import('react-type-animation').then((mod) => mod.TypeAnimation),
-  { ssr: false }
+  {
+    ssr: false,
+    loading: () => <span className="text-gray-900 dark:text-white">Tonderai Kawere</span>
+  }
 );
 
 const HeroSection = () => {
