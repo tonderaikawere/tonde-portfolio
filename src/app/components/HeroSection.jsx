@@ -16,6 +16,13 @@ const TypeAnimation = dynamic(
 );
 
 const HeroSection = () => {
+  const [startAnimation, setStartAnimation] = React.useState(false);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setStartAnimation(true), 3500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section className="min-h-screen relative flex items-center py-20 lg:py-0">
       <style>{`
@@ -64,14 +71,18 @@ const HeroSection = () => {
                 </span>
                 <br />
                 <div className="min-h-[4rem] sm:min-h-[5rem] md:min-h-[6rem] lg:min-h-[7rem] flex items-center justify-center lg:justify-start">
-                  <TypeAnimation
-                    sequence={["Tonderai Kawere", 1000, "A Software Developer", 1000]}
-                    wrapper="span"
-                    speed={50}
-                    repeat={Infinity}
-                    className="text-gray-900 dark:text-white whitespace-nowrap"
-                    style={{ display: 'inline-block' }}
-                  />
+                  {startAnimation ? (
+                    <TypeAnimation
+                      sequence={["Tonderai Kawere", 1000, "A Software Developer", 1000]}
+                      wrapper="span"
+                      speed={50}
+                      repeat={Infinity}
+                      className="text-gray-900 dark:text-white whitespace-nowrap"
+                      style={{ display: 'inline-block' }}
+                    />
+                  ) : (
+                    <span className="text-gray-900 dark:text-white">Tonderai Kawere</span>
+                  )}
                 </div>
               </h1>
               <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-4 sm:px-0">
