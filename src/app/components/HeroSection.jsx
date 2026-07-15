@@ -1,7 +1,15 @@
 "use client";
 import React from "react";
-import { TypeAnimation } from "react-type-animation";
-import AnimatedGlobe from "./AnimatedGlobe";
+import dynamic from 'next/dynamic';
+
+const AnimatedGlobe = dynamic(() => import('./AnimatedGlobe'), {
+  ssr: false,
+});
+
+const TypeAnimation = dynamic(
+  () => import('react-type-animation').then((mod) => mod.TypeAnimation),
+  { ssr: false }
+);
 
 const HeroSection = () => {
   return (
@@ -22,6 +30,17 @@ const HeroSection = () => {
         @keyframes codeRotate {
           from { transform: rotate(0deg) translate3d(0, 0, 0); }
           to { transform: rotate(360deg) translate3d(0, 0, 0); }
+        }
+        @media (min-width: 640px) {
+          .animate-float-top {
+            animation: codeFloatY 3s infinite ease-in-out;
+          }
+          .animate-float-bottom {
+            animation: codeFloatYReverse 2.5s infinite ease-in-out;
+          }
+          .animate-rotate-right {
+            animation: codeRotate 8s infinite linear;
+          }
         }
       `}</style>
 
@@ -83,27 +102,24 @@ const HeroSection = () => {
               <AnimatedGlobe />
               {/* Floating code elements - hidden on very small screens */}
               <div
-                className="absolute -top-4 sm:-top-8 -left-4 sm:-left-8 text-cyan-500 dark:text-cyan-400 text-lg sm:text-2xl hidden sm:block"
+                className="absolute -top-4 sm:-top-8 -left-4 sm:-left-8 text-cyan-500 dark:text-cyan-400 text-lg sm:text-2xl hidden sm:block animate-float-top"
                 style={{
-                  animation: 'codeFloatY 3s infinite ease-in-out',
                   willChange: 'transform',
                 }}
               >
                 &lt;/&gt;
               </div>
               <div
-                className="absolute -bottom-3 sm:-bottom-6 -right-3 sm:-right-6 text-purple-500 dark:text-purple-400 text-base sm:text-xl hidden sm:block"
+                className="absolute -bottom-3 sm:-bottom-6 -right-3 sm:-right-6 text-purple-500 dark:text-purple-400 text-base sm:text-xl hidden sm:block animate-float-bottom"
                 style={{
-                  animation: 'codeFloatYReverse 2.5s infinite ease-in-out',
                   willChange: 'transform',
                 }}
               >
                 &#123;&#125;
               </div>
               <div
-                className="absolute top-1/4 -right-6 sm:-right-12 text-green-500 dark:text-green-400 text-sm sm:text-lg hidden sm:block"
+                className="absolute top-1/4 -right-6 sm:-right-12 text-green-500 dark:text-green-400 text-sm sm:text-lg hidden sm:block animate-rotate-right"
                 style={{
-                  animation: 'codeRotate 8s infinite linear',
                   willChange: 'transform',
                 }}
               >
